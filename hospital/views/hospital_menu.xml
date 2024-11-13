@@ -2,9 +2,9 @@
 <odoo>
     <data>
         <menuitem id="hospital_root" name="Hospital" sequence="20" groups="group_hospital_employee" web_icon="hospital,static/description/icon.png">
-            <menuitem id="hospital_appointment" name="Appointment" action="action_hospital_appointment" sequence="1"/>
-            <menuitem id="hospital_patient" name="Patients" action="action_hospital_patient" sequence="2"/>
-            <menuitem id="hospital_doctor" name="Doctor" action="action_hospital_doctor" groups="group_hospital_manager" sequence="3"/>
+            <menuitem id="hospital_appointment" name="Citas" action="action_hospital_appointment" sequence="1"/>
+            <menuitem id="hospital_patient" name="Pacientes" action="action_hospital_patient" sequence="2"/>
+            <menuitem id="hospital_doctor" name="Doctores" action="action_hospital_doctor" groups="group_hospital_manager" sequence="3"/>
         </menuitem>
     </data>
 </odoo>
