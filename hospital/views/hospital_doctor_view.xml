@@ -57,13 +57,13 @@
         <!--        </record>-->
 
         <record id="action_hospital_doctor" model="ir.actions.act_window">
-            <field name="name">Doctors</field>
+            <field name="name">Doctores</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">hospital.doctor</field>
             <field name="view_mode">tree,form</field>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">
-                    Create appointments
+                    No hay Doctores, puede crear un nuevo Doctor
                 </p>
             </field>
         </record>
