@@ -10,7 +10,7 @@
                     <sheet>
                         <group>
                             <field name="sequence" invisible="1"/>
-                            <field name="name" string="Nombre"/>
+                           <!-- <field name="name" string="Nombre"/> -->
                             <field name="contact_id" string="Contacto"/>
                         </group>     
                         <group>
@@ -18,7 +18,7 @@
                             <field name="gender"/>
                         </group>
                         <group>
-                            <field name="email"/>
+                           <!--  <field name="email"/> -->
                         </group>                       
                     </sheet>
                     <div class="oe_chatter">
@@ -35,10 +35,10 @@
             <field name="model">hospital.patient</field>
             <field name="arch" type="xml">
                 <tree>
-                    <field name="name"/>
+                    <!--  <field name="name"/> -->
                     <field name="age"/>
                     <field name="gender"/>
-                    <field name="email"/>
+                     <!-- <field name="email"/> -->
                 </tree>
             </field>
         </record>
