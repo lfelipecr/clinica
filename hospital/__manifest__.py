@@ -1,8 +1,9 @@
 {
     'name': "Hospital",
-    'author': "Escuela Full Stack",
-    'website': "https://escuelafullstack.com/",
-    'summary': """Modulo para hospitales""",
+    'author': "Kibudoo",
+    'website': "https://www.Kibudoo.com/",
+    'summary': """Modulo para clinicas""",
+    'version': '2017.11.1',
     'depends': ['mail', 'portal', 'base', 'contacts'],
     'data': [
         'security/hospital_security.xml',
