@@ -6,11 +6,11 @@ class HospitalPatient(models.Model):
     _inherit = ['portal.mixin', 'mail.thread', 'mail.activity.mixin']
     _description = 'Patients'
 
-    name = fields.Char(string='Name', required=True, tracking=True)
+    name = fields.Char(string='Nombre', required=True, tracking=True)
     sequence = fields.Char(string='Sequence', default="New", readonly=True)
-    age = fields.Integer(string='Age', required=True, tracking=True)
-    gender = fields.Selection(string='Gender', selection=[('male', 'Male'), ('female', 'Female')], default='male', tracking=True)
-    email = fields.Char(string='Email')
+    age = fields.Integer(string='Edad', required=True, tracking=True)
+    gender = fields.Selection(string='Genero', selection=[('male', 'Masculino'), ('female', 'Femenino')], default='male', tracking=True)
+    email = fields.Char(string='Correo')
     company_id = fields.Many2one(comodel_name='res.company', default=lambda self: self.env.company)
 
     @api.model_create_multi

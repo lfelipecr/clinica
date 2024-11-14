@@ -13,8 +13,8 @@ class HospitalAppointment(models.Model):
     patient_id = fields.Many2one(comodel_name='hospital.patient', string='Patient', required=True)
     patient_age = fields.Integer(string='Age', related="patient_id.age", store=True)
     doctor_id = fields.Many2one(comodel_name='hospital.doctor', string='Doctor', required=True, tracking=True)
-    date = fields.Datetime(string='Date', required=True, tracking=True)
-    state = fields.Selection(string='State', selection=states, default='draft')
+    date = fields.Datetime(string='Fecha', required=True, tracking=True)
+    state = fields.Selection(string='Estado', selection=states, default='draft')
 
     @api.model_create_multi
     def create(self, vals_list):
