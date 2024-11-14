@@ -3,7 +3,7 @@
     'author': "Escuela Full Stack",
     'website': "https://escuelafullstack.com/",
     'summary': """Modulo para hospitales""",
-    'depends': ['mail', 'portal', 'base', 'contacts']],
+    'depends': ['mail', 'portal', 'base', 'contacts'],
     'data': [
         'security/hospital_security.xml',
         'security/ir.model.access.csv',
