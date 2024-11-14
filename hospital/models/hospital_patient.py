@@ -6,11 +6,13 @@ class HospitalPatient(models.Model):
     _inherit = ['portal.mixin', 'mail.thread', 'mail.activity.mixin']
     _description = 'Patients'
 
-    name = fields.Char(string='Nombre', required=True, tracking=True)   
+    # Elimina el campo `name`
+    # name = fields.Char(string='Nombre', required=True, tracking=True)   
+
     sequence = fields.Char(string='Sequence', default="New", readonly=True)
     age = fields.Integer(string='Edad', required=True, tracking=True)
     gender = fields.Selection(string='Genero', selection=[('male', 'Masculino'), ('female', 'Femenino')], default='male', tracking=True)
-    email = fields.Char(string='Correo')
+    # email = fields.Char(string='Correo')
     company_id = fields.Many2one(comodel_name='res.company', default=lambda self: self.env.company)
     contact_id = fields.Many2one(comodel_name='res.partner',string='Contacto',ondelete='set null',help='Selecciona el contacto asociado a este paciente.')
 
