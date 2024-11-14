@@ -12,6 +12,7 @@
                             <field name="sequence"/>
                             <h1>
                                 <field name="name"/>
+                                <field name="contact_id"/>
                             </h1>
                         </div>
                         <group>
