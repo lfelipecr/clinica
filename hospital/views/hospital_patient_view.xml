@@ -11,8 +11,8 @@
                         <div class="oe_title">
                             <field name="sequence"/>
                             <h1>
-                                <field name="name"/>
-                                <field name="contact_id"/>
+                                <field name="name" string="Nombre"/>
+                                <field name="contact_id" string="Contacto"/>
                             </h1>
                         </div>
                         <group>
