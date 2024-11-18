@@ -12,12 +12,31 @@
                             <field name="sequence" invisible="1"/>
                            <!-- <field name="name" string="Nombre"/> -->
                             <field name="contact_id" string="Contacto"/>
-                        </group>     
-                        <group>
-                            <field name="age"/>
+                            <field name="phone" readonly="1"/> <!-- Teléfono relacionado, solo lectura -->
+                            <field name="email" readonly="1"/> <!-- Correo electrónico relacionado, solo lectura -->
+                            <field name="nacimiento"/><!-- Campo de Fecha de Nacimiento -->
+                            <field name="age" readonly="1"/> <!-- Edad calculada basada en la Fecha de Nacimiento -->
                             <field name="gender"/>
-                        </group>
-                        <group>
+                            <field name="peso" />
+                            <field name="altura" />
+                            <field name="imc" readonly="1" />
+                            <field name="antecedentes_personales" />
+                            <field name="medicamentos_actuales" widget="many2many_tags" />
+                            <field name="fuma" />
+                            <field name="alcohol" />
+                            <field name="drogas" />
+                            <field name="cocina_lena" />
+                            <field name="vacunas" />
+                            <field name="antecedentes_heredofamiliares" />
+                            <field name="antecedentes_quirurgicos" />
+                            <field name="sexualmente_activo" />
+                            <field name="metodo_planificacion" />
+                            <field name="numero_embarazos" />
+                            <field name="numero_partos" />
+                            <field name="numero_abortos" />
+                            <field name="numero_cesareas" />
+                            <field name="fecha_ultima_citologia" />
+                     
                            <!--  <field name="email"/> -->
                         </group>                       
                     </sheet>

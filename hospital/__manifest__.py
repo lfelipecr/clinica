@@ -4,7 +4,7 @@
     'website': "https://www.Kibudoo.com/",
     'summary': """Modulo para clinicas""",
     'version': '2017.11.1',
-    'depends': ['mail', 'portal', 'base', 'contacts'],
+    'depends': ['mail', 'portal', 'base', 'contacts','product'],
     'data': [
         'security/hospital_security.xml',
         'security/ir.model.access.csv',
