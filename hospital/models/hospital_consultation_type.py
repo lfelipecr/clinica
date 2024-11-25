@@ -32,7 +32,31 @@ class HospitalConsultationType(models.Model):
         string='Doctores Asociados',
         help='Doctores que pueden realizar este tipo de consulta'
     )  # Campo añadido para asociar doctores
+    
+    # Campo para la moneda
+    currency_id = fields.Many2one(
+        'res.currency', 
+        string='Moneda',
+        required=True, 
+        default=lambda self: self.env.company.currency_id,
+        help='Moneda para el valor de la consulta.'
+    )  # Campo Many2one para seleccionar moneda
 
+    # Campo para el monto de la consulta
+    valor = fields.Monetary(
+        string='Valor',
+        currency_field='currency_id',
+        required=True,
+        help='Costo de la consulta en la moneda seleccionada.'
+    )  # Campo para el monto
+
+    # Campo para asociar un producto facturable
+    product_id = fields.Many2one(
+        'product.product',
+        string='Producto Asociado',
+        required=True,
+        help='Producto que se facturará cuando se realice este tipo de consulta.'
+    )  # Campo Many2one para asociar un producto
 
 
     # Opcional: Agregar tracking para mejorar la trazabilidad en el modelo

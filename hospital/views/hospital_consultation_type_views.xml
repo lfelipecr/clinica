@@ -30,11 +30,12 @@
                         <group>
                             <field name="name"/>
                             <field name="description"/>
-                        </group>
-                        <group>
                             <field name="code"/>
                             <field name="doctor_ids" widget="many2many_tags"/> <!-- Campo agregado -->
-                        </group>
+                            <field name="currency_id"/>
+                            <field name="valor"/>
+                            <field name="product_id"/>
+                        </group>                        
                     </sheet>
                 </form>
             </field>

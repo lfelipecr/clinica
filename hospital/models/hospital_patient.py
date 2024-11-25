@@ -102,6 +102,26 @@ class HospitalPatient(models.Model):
         store=False
     )
      
+         # Campos para el Chatter (Agregados)
+    message_follower_ids = fields.One2many(
+        'mail.followers', 'res_id',
+        string='Followers',
+        auto_join=True,
+        readonly=True
+    )
+    message_ids = fields.One2many(
+        'mail.message', 'res_id',
+        string='Messages',
+        auto_join=True,
+        readonly=True
+    )
+    activity_ids = fields.One2many(
+        'mail.activity', 'res_id',
+        string='Activities',
+        auto_join=True,
+        readonly=True
+    )
+
 
     # Métodos para cálculos
     @api.depends('nacimiento')
