@@ -1,91 +1,100 @@
-<?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-
+        <!-- Vista de formulario -->
         <record id="view_hospital_patient_form" model="ir.ui.view">
             <field name="name">hospital.patient.form</field>
             <field name="model">hospital.patient</field>
             <field name="arch" type="xml">
                 <form>
                     <sheet>
-                        <group>
-                            <field name="sequence" invisible="1"/>
-                           <!-- <field name="name" string="Nombre"/> -->
-                            <field name="contact_id" string="Contacto"/>
-                            <field name="phone" readonly="1"/> <!-- Teléfono relacionado, solo lectura -->
-                            <field name="email" readonly="1"/> <!-- Correo electrónico relacionado, solo lectura -->
-                            <field name="nacimiento"/><!-- Campo de Fecha de Nacimiento -->
-                            <field name="age" readonly="1"/> <!-- Edad calculada basada en la Fecha de Nacimiento -->
-                            <field name="gender"/>
-                            <field name="peso" />
-                            <field name="altura" />
-                            <field name="imc" readonly="1" />
-                            <field name="antecedentes_personales" />
-                            <field name="medicamentos_actuales" widget="many2many_tags" />
-                            <field name="fuma" />
-                            <field name="alcohol" />
-                            <field name="drogas" />
-                            <field name="cocina_lena" />
-                            <field name="vacunas" />
-                            <field name="antecedentes_heredofamiliares" />
-                            <field name="antecedentes_quirurgicos" />
-                            <field name="sexualmente_activo" />
-                            <field name="metodo_planificacion" />
-                            <field name="numero_embarazos" />
-                            <field name="numero_partos" />
-                            <field name="numero_abortos" />
-                            <field name="numero_cesareas" />
-                            <field name="fecha_ultima_citologia" />
-                     
-                           <!--  <field name="email"/> -->
-                        </group>                       
+                        <div class="oe_title">
+                            <h1>
+                                <field name="contact_id"/>
+                            </h1>
+                        </div>
+                        <notebook>
+                            <!-- Pestaña General -->
+                            <page string="General">
+                                <group>
+                                    <group>
+                                        <field name="contact_id"/>
+                                        <field name="phone"/>
+                                        <field name="email"/>
+                                    </group>
+                                    <group>
+                                        <field name="nacimiento"/>
+                                        <field name="age"/>
+                                        <field name="gender"/>
+                                        <field name="peso"/>
+                                        <field name="altura"/>
+                                        <field name="imc"/>
+                                    </group>
+                                    <group>
+                                        <field name="tipo_sangre"/>
+                                        <field name="diabetico"/>
+                                        <field name="hipertenso"/>
+                                    </group>
+                                </group>
+                            </page>
+
+                            <!-- Pestaña Salud -->
+                            <page string="Salud">
+                                <group>
+                                    <field name="alergias"/>
+                                    <field name="antecedentes_personales"/>
+                                    <field name="antecedentes_quirurgicos"/>
+                                    <field name="antecedentes_heredofamiliares"/>
+                                    <field name="medicamentos_actuales" widget="many2many_tags"/>
+                                    <field name="vacunas"/>
+                                </group>
+                            </page>
+
+                            <!-- Pestaña Ginecológicos -->
+                            <page string="Ginecológicos" modifiers="{'invisible': [('show_ginecologicos', '=', False)]}">
+                                <group>
+                                    <field name="numero_embarazos"/>
+                                    <field name="numero_partos"/>
+                                    <field name="numero_abortos"/>
+                                    <field name="numero_cesareas"/>
+                                    <field name="fecha_ultima_citologia"/>
+                                </group>
+                            </page>
+
+                            <!-- Pestaña Hábitos -->
+                            <page string="Hábitos">
+                                <group>
+                                    <field name="fuma"/>
+                                    <field name="alcohol"/>
+                                    <field name="drogas"/>
+                                    <field name="cocina_lena"/>
+                                </group>
+                            </page>
+                        </notebook>
                     </sheet>
-                    <div class="oe_chatter">
-                        <field name="message_follower_ids"/>
-                        <field name="activity_ids"/>
-                        <field name="message_ids"/>
-                    </div>
                 </form>
             </field>
         </record>
 
+        <!-- Vista de lista -->
         <record id="view_hospital_patient_tree" model="ir.ui.view">
             <field name="name">hospital.patient.tree</field>
             <field name="model">hospital.patient</field>
             <field name="arch" type="xml">
                 <tree>
-                    <!--  <field name="name"/> -->
-                    <field name="age"/>
+                    <field name="contact_id"/>
+                    <field name="phone"/>
+                    <field name="email"/>
+                    <field name="nacimiento"/>
                     <field name="gender"/>
-                     <!-- <field name="email"/> -->
                 </tree>
             </field>
         </record>
 
-<!--        <record id="view_hospital_patient_search_view" model="ir.ui.view">-->
-<!--            <field name="name">ProjectName.view_hospital_patient.search</field>-->
-<!--            <field name="model">ProjectName.view_hospital_patient</field>-->
-<!--            <field name="arch" type="xml">-->
-<!--                <search string="ModelTitle">-->
-<!--                    <group expand="1" string="Group By">-->
-<!--                        <filter string="Example Field" name="example_field" domain="[]"-->
-<!--                                context="{'group_by':'example_field'}"/>-->
-<!--                    </group>-->
-<!--                </search>-->
-<!--            </field>-->
-<!--        </record>-->
-
+        <!-- Acción para los pacientes -->
         <record id="action_hospital_patient" model="ir.actions.act_window">
             <field name="name">Pacientes</field>
-            <field name="type">ir.actions.act_window</field>
             <field name="res_model">hospital.patient</field>
             <field name="view_mode">tree,form</field>
-            <field name="help" type="html">
-                <p class="oe_view_nocontent_create">
-                    No hay pacientes, puede crear un nuevo paciente
-                </p>
-            </field>
         </record>
-
     </data>
 </odoo>

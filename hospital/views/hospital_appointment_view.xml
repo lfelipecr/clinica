@@ -1,36 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+        <!-- Vista de búsqueda -->
         <record id="view_hospital_appointment_search" model="ir.ui.view">
             <field name="name">hospital.appointment.search</field>
             <field name="model">hospital.appointment</field>
             <field name="arch" type="xml">
                 <search>
                     <field name="patient_id"/>
+                    <field name="consultation_type_id"/> <!-- Campo agregado -->
                     <filter string="Confirmed" name="confirmed" domain="[('state', '=', 'confirmed')]"/>
                     <filter string="Done" name="done" domain="[('state', '=', 'done')]"/>
                     <group expand="1">
-                        <filter string="State" name="state" domain="[]"
-                                context="{'group_by':'state'}"/>
-                        <filter string="Patient" name="patient" domain="[]"
-                                context="{'group_by':'patient_id'}"/>
-                        <filter string="Doctor" name="doctor" domain="[]"
-                                context="{'group_by':'doctor_id'}"/>
+                        <filter string="State" name="state" domain="[]" context="{'group_by':'state'}"/>
+                        <filter string="Patient" name="patient" domain="[]" context="{'group_by':'patient_id'}"/>
+                        <filter string="Doctor" name="doctor" domain="[]" context="{'group_by':'doctor_id'}"/>
+                        <filter string="Consultation Type" name="consultation_type" domain="[]" context="{'group_by':'consultation_type_id'}"/> <!-- Campo agregado -->
                     </group>
                 </search>
             </field>
         </record>
+
+        <!-- Vista de pivot -->
         <record id="view_hospital_appointment_pivot" model="ir.ui.view">
             <field name="name">hospital.appointment.pivot</field>
             <field name="model">hospital.appointment</field>
             <field name="arch" type="xml">
                 <pivot sample="1">
                     <field name="doctor_id" type="row"/>
+                    <field name="consultation_type_id" type="row"/> <!-- Campo agregado -->
                     <field name="date" type="row"/>
                     <field name="patient_id" type="measure"/>
                 </pivot>
             </field>
         </record>
+
+        <!-- Vista de calendario -->
         <record id="view_hospital_appointment_calendar" model="ir.ui.view">
             <field name="name">hospital.appointment.calendar</field>
             <field name="model">hospital.appointment</field>
@@ -39,11 +44,14 @@
                     <field name="name"/>
                     <field name="patient_id"/>
                     <field name="doctor_id"/>
+                    <field name="consultation_type_id"/> <!-- Campo agregado -->
                     <field name="doctor_id" filters="1"/>
                     <field name="state" filters="1"/>
                 </calendar>
             </field>
         </record>
+
+        <!-- Vista de formulario -->
         <record id="view_hospital_appointment_form" model="ir.ui.view">
             <field name="name">hospital.appointment.form</field>
             <field name="model">hospital.appointment</field>
@@ -74,6 +82,7 @@
                                 <field name="date"/>
                                 <field name="doctor_id"
                                        options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                                <field name="consultation_type_id"/> <!-- Campo agregado -->
                             </group>
                         </group>
                     </sheet>
@@ -86,6 +95,7 @@
             </field>
         </record>
 
+        <!-- Vista de lista -->
         <record id="view_hospital_appointment_tree" model="ir.ui.view">
             <field name="name">hospital.appointment.tree</field>
             <field name="model">hospital.appointment</field>
@@ -96,6 +106,7 @@
                     <field name="patient_id"/>
                     <field name="patient_age"/>
                     <field name="doctor_id"/>
+                    <field name="consultation_type_id"/> <!-- Campo agregado -->
                     <field name="state"
                            decoration-success="state == 'done'"
                            decoration-info="state == 'confirmed'"
@@ -105,6 +116,7 @@
             </field>
         </record>
 
+        <!-- Acción -->
         <record id="action_hospital_appointment" model="ir.actions.act_window">
             <field name="name">Citas</field>
             <field name="type">ir.actions.act_window</field>

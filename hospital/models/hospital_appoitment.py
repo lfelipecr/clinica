@@ -16,6 +16,14 @@ class HospitalAppointment(models.Model):
     date = fields.Datetime(string='Fecha', required=True, tracking=True)
     state = fields.Selection(string='Estado', selection=states, default='draft')
 
+     # Campo agregado
+    consultation_type_id = fields.Many2one(
+        'hospital.consultation.type',
+        string='Tipo de Consulta',
+        required=True,
+        help='Selecciona el tipo de consulta asociada a esta cita.'  # Ayuda para el usuario
+    )
+
     @api.model_create_multi
     def create(self, vals_list):
         for vals in vals_list:

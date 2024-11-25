@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
-        <menuitem id="hospital_root" name="Hospital" sequence="20" groups="group_hospital_employee" web_icon="hospital,static/description/icon.png">
-            <menuitem id="hospital_appointment" name="Citas" action="action_hospital_appointment" sequence="1"/>
-            <menuitem id="hospital_patient" name="Pacientes" action="action_hospital_patient" sequence="2"/>
-            <menuitem id="hospital_doctor" name="Doctores" action="action_hospital_doctor" groups="group_hospital_manager" sequence="3"/>
-        </menuitem>
+        <!-- Menú principal -->
+        <menuitem id="hospital_root" name="Hospital" sequence="20" groups="group_hospital_employee" web_icon="hospital,static/description/icon.png"/>
+        
+        <!-- Submenús del menú principal -->
+        <menuitem id="hospital_appointment" name="Citas" parent="hospital_root" action="action_hospital_appointment" sequence="1"/>
+        <menuitem id="hospital_patient" name="Pacientes" parent="hospital_root" action="action_hospital_patient" sequence="2"/>
+        <menuitem id="hospital_doctor" name="Doctores" parent="hospital_root" action="action_hospital_doctor" groups="group_hospital_manager" sequence="3"/>
+        <menuitem id="hospital_consultation" name="Consultas" parent="hospital_root" action="action_hospital_consultation" groups="group_hospital_employee" sequence="4"/>
+        
+        <!-- Menú de configuración -->
+        <menuitem id="menu_hospital_config" name="Configuración" parent="hospital_root" sequence="5" groups="base.group_system"/>
+        <menuitem id="menu_hospital_consultation_type" name="Tipos de Consulta" parent="menu_hospital_config" action="action_hospital_consultation_type" sequence="10"/>
     </data>
 </odoo>
