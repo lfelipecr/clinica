@@ -101,8 +101,37 @@ class HospitalPatient(models.Model):
         compute="_compute_show_ginecologicos",
         store=False
     )
+
+    consultation_count = fields.Integer(
+        string='Consultas',
+        compute='_compute_consultation_count',
+        store=False
+    )  # Campo computado para contar consultas
+
+    # Campo computado para contar citas
+    appointment_count = fields.Integer(
+        string='Citas',
+        compute='_compute_appointment_count',
+        store=False
+    )
+    
+    # Campo computado para el monto total facturado
+    total_invoiced = fields.Monetary(
+        string='Monto Facturado',
+        compute='_compute_total_invoiced',
+        currency_field='currency_id',
+        store=False
+    )
+    
+    currency_id = fields.Many2one(
+        'res.currency',
+        string='Moneda',
+        default=lambda self: self.env.company.currency_id,
+        required=True
+    )
+
      
-         # Campos para el Chatter (Agregados)
+    # Campos para el Chatter (Agregados)
     message_follower_ids = fields.One2many(
         'mail.followers', 'res_id',
         string='Followers',
@@ -156,4 +185,62 @@ class HospitalPatient(models.Model):
     def _compute_show_ginecologicos(self):
         for record in self:
             record.show_ginecologicos = record.gender == 'female'
+    
+    def _compute_consultation_count(self):
+        for record in self:
+            record.consultation_count = self.env['hospital.consultation'].search_count([
+                ('patient_id', '=', record.id)
+            ])  # Cuenta las consultas asociadas al paciente
+
+    def action_view_consultations(self):
+        """Acción para mostrar las consultas del paciente."""
+        return {
+            'name': _('Consultas'),
+            'type': 'ir.actions.act_window',
+            'view_mode': 'tree,form',
+            'res_model': 'hospital.consultation',
+            'domain': [('patient_id', '=', self.id)],
+            'context': dict(self.env.context, default_patient_id=self.id),
+        }
+    
+    def _compute_appointment_count(self):
+        for record in self:
+            record.appointment_count = self.env['hospital.appointment'].search_count([
+                ('patient_id', '=', record.id)
+            ])  # Cuenta las citas asociadas al paciente
+
+    def action_view_appointments(self):
+        """Acción para mostrar las citas del paciente."""
+        return {
+            'name': _('Citas'),
+            'type': 'ir.actions.act_window',
+            'view_mode': 'tree,form',
+            'res_model': 'hospital.appointment',
+            'domain': [('patient_id', '=', self.id)],
+            'context': dict(self.env.context, default_patient_id=self.id),
+        }
+
+    def _compute_total_invoiced(self):
+        for record in self:
+            invoices = self.env['account.move'].search([
+                ('partner_id', '=', record.contact_id.id),
+                ('state', '=', 'posted'),
+                ('move_type', '=', 'out_invoice')  # Solo facturas de cliente
+            ])
+            record.total_invoiced = sum(invoices.mapped('amount_total'))  # Suma el total de las facturas
+
+    def action_view_invoices(self):
+        """Acción para mostrar las facturas del paciente."""
+        return {
+            'name': _('Facturas'),
+            'type': 'ir.actions.act_window',
+            'view_mode': 'tree,form',
+            'res_model': 'account.move',
+            'domain': [
+                ('partner_id', '=', self.contact_id.id),
+                ('state', '=', 'posted'),
+                ('move_type', '=', 'out_invoice')
+            ],
+            'context': dict(self.env.context, default_partner_id=self.contact_id.id),
+        }
     

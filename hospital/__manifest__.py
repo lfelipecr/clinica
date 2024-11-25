@@ -4,7 +4,7 @@
     'website': "https://www.Kibudoo.com/",
     'summary': """Modulo para clinicas""",
     'version': '2017.11.1',
-    'depends': ['mail', 'portal', 'base', 'contacts', 'product'],
+    'depends': ['mail', 'portal', 'base', 'contacts', 'product', 'account'],
     'data': [
         'security/hospital_security.xml',
         'security/ir.model.access.csv',
@@ -15,6 +15,7 @@
         'views/hospital_appointment_view.xml',
         'views/hospital_consultation_views.xml',
         'views/hospital_consultation_type_views.xml',  # Cambiado: Ahora antes de hospital_menu.xml
+        'views/hospital_exam_type_views.xml',  # Nuevo archivo de vistas
         'views/hospital_menu.xml',  # Menú cargado al final para evitar referencias inválidas
     ],
     'installable': True,

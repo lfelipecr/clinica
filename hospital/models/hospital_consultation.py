@@ -16,6 +16,12 @@ class HospitalConsultation(models.Model):
     notes = fields.Text(string='Consultation Notes')
     prescription_ids = fields.One2many('hospital.prescription', 'consultation_id', string='Prescripción')
     reason = fields.Char(string='Motivo', required=True, tracking=True)
+    consultation_type_id = fields.Many2one(
+        'hospital.consultation.type', 
+        string='Especialidad',  # Cambiado para reflejar la especialidad
+        required=True,
+        help='Especialidad asociada a esta consulta.'
+    )    
 
     weight = fields.Float(string='Peso (kg)', help='Peso del paciente en el momento de la consulta.')
     height = fields.Float(string='Altura (cm)', help='Altura del paciente en el momento de la consulta.')

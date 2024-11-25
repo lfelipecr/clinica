@@ -15,6 +15,7 @@
                             <field name="reason" string="Motivo Consulta"/> 
                             <field name="doctor_id" string="Doctor"/>
                             <field name="appointment_id" string="Cita Asociada"/>
+                            <field name="consultation_type_id" string="Especialidad"/>
                             <field name="date" string="Fecha"/>
                             <field name="notes" string="Notas"/>
                         </group>
@@ -50,6 +51,8 @@
                     <field name="patient_id"/>
                     <field name="doctor_id"/>
                     <field name="date"/>
+                    <field name="consultation_type_id" string="Especialidad"/>
+
                 </tree>
             </field>
         </record>

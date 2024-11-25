@@ -13,5 +13,7 @@
         <!-- Menú de configuración -->
         <menuitem id="menu_hospital_config" name="Configuración" parent="hospital_root" sequence="5" groups="base.group_system"/>
         <menuitem id="menu_hospital_consultation_type" name="Tipos de Consulta" parent="menu_hospital_config" action="action_hospital_consultation_type" sequence="10"/>
+        <menuitem id="menu_hospital_exam_type" name="Tipo de Exámenes" parent="menu_hospital_config" action="action_hospital_exam_type" sequence="20"/>
+
     </data>
 </odoo>
