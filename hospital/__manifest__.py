@@ -16,6 +16,7 @@
         'views/hospital_consultation_views.xml',
         'views/hospital_consultation_type_views.xml',  # Cambiado: Ahora antes de hospital_menu.xml
         'views/hospital_exam_type_views.xml',  # Nuevo archivo de vistas
+        'views/hospital_exam_views.xml',  # Nuevo archivo para exámenes
         'views/hospital_menu.xml',  # Menú cargado al final para evitar referencias inválidas
     ],
     'installable': True,

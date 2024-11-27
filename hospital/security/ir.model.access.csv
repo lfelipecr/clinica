@@ -6,7 +6,7 @@ access_hospital_consultation,hospital.consultation,model_hospital_consultation,g
 access_hospital_prescription,hospital_prescription,model_hospital_prescription,group_hospital_manager,1,1,1,1
 access_hospital_consultation_type_manager,hospital_consultation_type_manager,model_hospital_consultation_type,group_hospital_manager,1,1,1,1
 access_hospital_exam_type_user,hospital.exam.type,model_hospital_exam_type,group_hospital_manager,1,1,1,1
-access_hospital_exam,hospital_exam,model_hospital_exam,group_hospital_manager,1,1,1,1
+access_hospital_exam_manager,hospital.exam.manager,model_hospital_exam,group_hospital_manager,1,1,1,1
 
 
 
@@ -17,7 +17,12 @@ access_hospital_consultation,hospital.consultation,model_hospital_consultation,g
 access_hospital_prescription,hospital_prescription,model_hospital_prescription,group_hospital_employee,1,1,1,1
 access_hospital_consultation_type_manager,hospital_consultation_type_manager,model_hospital_consultation_type,group_hospital_employee,1,1,1,1
 access_hospital_exam_type_user,hospital.exam.type,model_hospital_exam_type,group_hospital_employee,1,1,1,1
-access_hospital_exam,hospital_exam,model_hospital_exam,group_hospital_employee,1,1,1,1
+access_hospital_exam_user,hospital.exam.user,model_hospital_exam,group_hospital_employee,1,1,1,1
+
+
+
+
+
 
 
 
