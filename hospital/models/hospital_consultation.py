@@ -101,9 +101,6 @@ class HospitalConsultation(models.Model):
     # Métodos
     @api.model_create_multi
     def create(self, vals_list):
-        """
-        Sobrescritura del método `create` para asignar automáticamente una secuencia única.
-        """
         for vals in vals_list:
             if vals.get('name', _("New")) == _("New"):
                 vals['name'] = self.env['ir.sequence'].next_by_code('hospital.consultation') or _("New")
@@ -111,22 +108,11 @@ class HospitalConsultation(models.Model):
 
     @api.onchange('exam_ids')
     def _onchange_exam_ids(self):
-        print("Onchange triggered for exams")
         for exam in self.exam_ids:
             if not exam.patient_id:
                 exam.patient_id = self.patient_id
             if not exam.doctor_id:
                 exam.doctor_id = self.doctor_id
-
-    @api.model
-    def create(self, vals):
-        res = super(HospitalConsultation, self).create(vals)
-        for exam in res.exam_ids:
-            if not exam.patient_id:
-                exam.patient_id = res.patient_id
-            if not exam.doctor_id:
-                exam.doctor_id = res.doctor_id
-            return res
 
     def write(self, vals):
         res = super(HospitalConsultation, self).write(vals)
@@ -135,4 +121,4 @@ class HospitalConsultation(models.Model):
                 exam.patient_id = self.patient_id
             if not exam.doctor_id:
                 exam.doctor_id = self.doctor_id
-            return res
+        return res
