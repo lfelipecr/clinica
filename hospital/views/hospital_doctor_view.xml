@@ -1,61 +1,62 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <data>
-        <record id="view_hospital_doctor_form" model="ir.ui.view">
-            <field name="name">hospital.doctor.form</field>
-            <field name="model">hospital.doctor</field>
-            <field name="arch" type="xml">
-                <form>
-                    <sheet>
-                        <div class="oe_title">
-                            <h1>
-                                <field name="name"/>
-                            </h1>
-                        </div>
-                        <group>
-                            <group>
-                                <field name="age"/>
-                                <field name="gender"/>
-                            </group>
-                            <group>
-                                <field name="specialty"/>
-                            </group>
-                        </group>
-                    </sheet>
-                    <div class="oe_chatter">
-                        <field name="message_follower_ids"/>
-                        <field name="activity_ids"/>
-                        <field name="message_ids"/>
-                    </div>
-                </form>
-            </field>
-        </record>
-
+        <!-- Vista de Lista para Doctores -->
         <record id="view_hospital_doctor_tree" model="ir.ui.view">
             <field name="name">hospital.doctor.tree</field>
             <field name="model">hospital.doctor</field>
             <field name="arch" type="xml">
-                <tree>
-                    <field name="name"/>
-                    <field name="age"/>
-                    <field name="gender"/>
+                <tree string="Doctores">
+                    <!-- Foto con tamaño reducido -->
+                    <field name="photo" widget="image" options="{'size': [50, 50]}" string="Foto"/>
+                    <!-- Campos relevantes -->
+                    <field name="name" string="Nombre"/>
+                    <field name="specialty_id" string="Especialidad"/>
+                    <field name="id_type" string="Tipo de Identificación"/>
+                    <field name="id_number" string="Número de Identificación"/>
+                    <field name="age" string="Edad"/>
+                    <field name="medical_card" string="Carné de Médico"/>
+                    <field name="medical_school" string="Escuela de Medicina"/>
                 </tree>
             </field>
         </record>
 
-        <!--        <record id="view_hospital_patient_search_view" model="ir.ui.view">-->
-        <!--            <field name="name">ProjectName.view_hospital_patient.search</field>-->
-        <!--            <field name="model">ProjectName.view_hospital_patient</field>-->
-        <!--            <field name="arch" type="xml">-->
-        <!--                <search string="ModelTitle">-->
-        <!--                    <group expand="1" string="Group By">-->
-        <!--                        <filter string="Example Field" name="example_field" domain="[]"-->
-        <!--                                context="{'group_by':'example_field'}"/>-->
-        <!--                    </group>-->
-        <!--                </search>-->
-        <!--            </field>-->
-        <!--        </record>-->
+        <!-- Vista de Formulario para Doctores -->
+        <record id="view_hospital_doctor_form" model="ir.ui.view">
+            <field name="name">hospital.doctor.form</field>
+            <field name="model">hospital.doctor</field>
+            <field name="arch" type="xml">
+                <form string="Doctor">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" string="Nombre" class="oe_edit_only"/>
+                            <h1>
+                                <field name="name" placeholder="Nombre del Doctor"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <group>
+                                <!-- Foto alineada a la derecha -->
+                                <field name="photo" widget="image" class="oe_right" style="width: 120px; height: auto;" string="Foto"/>
+                            </group>
+                            <group>
+                                <!-- Orden ajustado para tipo y número de identificación -->
+                                <field name="id_type" string="Tipo de Identificación"/>
+                                <field name="id_number" string="Número de Identificación"/>
+                                <field name="birth_date" string="Fecha de Nacimiento"/>
+                                <field name="age" string="Edad" readonly="1"/>
+                                <field name="gender" string="Género"/>
+                                <field name="specialty_id" string="Especialidad"/>
+                                <field name="medical_card" string="Carné de Médico"/>
+                                <field name="medical_school" string="Escuela de Medicina"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
 
+        <!-- Acción para los Doctores -->
         <record id="action_hospital_doctor" model="ir.actions.act_window">
             <field name="name">Doctores</field>
             <field name="type">ir.actions.act_window</field>
@@ -63,7 +64,7 @@
             <field name="view_mode">tree,form</field>
             <field name="help" type="html">
                 <p class="oe_view_nocontent_create">
-                    No hay Doctores, puede crear un nuevo Doctor
+                    No hay doctores disponibles, puede crear uno nuevo.
                 </p>
             </field>
         </record>
