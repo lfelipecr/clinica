@@ -31,6 +31,9 @@ class HospitalConsultation(models.Model):
     respiratory_rate = fields.Integer(string='Frecuencia Respiratoria (resp/min)', help='Frecuencia respiratoria en respiraciones por minuto.')
     oxygen_saturation = fields.Float(string='Saturación de Oxígeno (%)', help='Nivel de saturación de oxígeno en la sangre.')  # Campo agregado
 
+    exam_ids = fields.One2many('hospital.exam', 'consultation_id', string='Exámenes')
+
+
 
     @api.model_create_multi
     def create(self, vals_list):
