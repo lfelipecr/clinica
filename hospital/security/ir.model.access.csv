@@ -3,12 +3,15 @@ access_clinica_paciente_manager,clinica_paciente_manager,model_clinica_paciente,
 access_clinica_medico_manager,access.clinica.medico.manager,model_clinica_medico,group_clinica_manager,1,1,1,1
 access_clinica_especialidad_manager,clinica_especialidad_manager,model_clinica_especialidad,group_clinica_manager,1,1,1,1
 access_clinica_cita_manager,clinica_cita_manager,model_clinica_cita,group_clinica_manager,1,1,1,1
+access_clinica_consulta_manager,clinica_consulta_manager,model_clinica_consulta,group_clinica_manager,1,1,1,1
 
 
 access_clinica_paciente_employee,clinica_paciente_employee,model_clinica_paciente,group_clinica_employee,1,1,1,1
 access_clinica_medico_user,access.clinica.medico.user,model_clinica_medico,group_clinica_employee,1,1,1,1
 access_clinica_especialidad_employee,clinica_especialidad_employee,model_clinica_especialidad,group_clinica_employee,1,1,1,1
 access_clinica_cita_employee,clinica_cita_employee,model_clinica_cita,group_clinica_employee,1,1,1,1
+access_clinica_consulta_employee,clinica_consulta_employee,model_clinica_consulta,group_clinica_employee,1,1,1,0
+
 
 
 

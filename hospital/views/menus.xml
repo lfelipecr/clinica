@@ -1,22 +1,12 @@
 <odoo>
     <!-- Menú Principal -->
     <menuitem id="menu_clinica_root" name="Clínica" sequence="10" />
-    
-    <!-- Submenú Pacientes -->
-    <menuitem id="menu_clinica_pacientes" name="Pacientes" parent="menu_clinica_root" sequence="10" />
-    
-    <!-- Lista de Pacientes -->
-    <menuitem id="menu_clinica_pacientes_list" name="Lista de Pacientes" parent="menu_clinica_pacientes" action="action_paciente" sequence="10"/>
-    
-    <!-- Submenú Médicos -->
+
+    <!-- Menús Directos -->
+    <menuitem id="menu_clinica_pacientes" name="Pacientes" parent="menu_clinica_root" action="action_paciente" sequence="10"/>
     <menuitem id="menu_clinica_medicos" name="Médicos" parent="menu_clinica_root" action="action_medico" sequence="20"/>
-    
-    <!-- Submenú Especialidades -->
-    <menuitem id="menu_clinica_especialidades" name="Especialidades" parent="menu_clinica_root" action="action_especialidad" sequence="30"/>
-    
-    <!-- Submenú Citas -->
-    <menuitem id="menu_clinica_citas" name="Citas" parent="menu_clinica_root" sequence="40" />
-    
-    <!-- Lista de Citas -->
-    <menuitem id="menu_clinica_citas_list" name="Lista de Citas" parent="menu_clinica_citas" action="action_cita" sequence="10"/>
+    <menuitem id="menu_clinica_citas" name="Citas" parent="menu_clinica_root" action="action_cita" sequence="30"/>
+    <menuitem id="menu_clinica_consultas" name="Consultas" parent="menu_clinica_root" action="action_consulta" sequence="40"/>
+    <menuitem id="menu_clinica_especialidades" name="Especialidades" parent="menu_clinica_root" action="action_especialidad" sequence="50"/>
+
 </odoo>

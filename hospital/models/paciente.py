@@ -120,37 +120,7 @@ class HospitalPatient(models.Model):
         for record in self:
             record.show_ginecologicos = record.gender == 'female'
 
-    # def _compute_consultation_count(self):
-    #     for record in self:
-    #         record.consultation_count = self.env['hospital.consultation'].search_count([
-    #             ('patient_id', '=', record.id)
-    #         ])
 
-    # def action_view_consultations(self):
-    #     return {
-    #         'name': _('Consultas'),
-    #         'type': 'ir.actions.act_window',
-    #         'view_mode': 'tree,form',
-    #         'res_model': 'hospital.consultation',
-    #         'domain': [('patient_id', '=', self.id)],
-    #         'context': dict(self.env.context, default_patient_id=self.id),
-    #     }
-
-    # def _compute_appointment_count(self):
-    #     for record in self:
-    #         record.appointment_count = self.env['hospital.appointment'].search_count([
-    #             ('patient_id', '=', record.id)
-    #         ])
-
-    # def action_view_appointments(self):
-    #     return {
-    #         'name': _('Citas'),
-    #         'type': 'ir.actions.act_window',
-    #         'view_mode': 'tree,form',
-    #         'res_model': 'hospital.appointment',
-    #         'domain': [('patient_id', '=', self.id)],
-    #         'context': dict(self.env.context, default_patient_id=self.id),
-    #     }
 
     def _compute_total_invoiced(self):
         for record in self:

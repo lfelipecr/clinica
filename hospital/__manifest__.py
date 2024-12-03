@@ -12,10 +12,12 @@
         # Secuencias
         'data/sequence.xml',  # Incluye el archivo de secuencias
         # Vistas
+
         'views/paciente_views.xml',
         'views/medico_views.xml',
         'views/especialidad_views.xml',
         'views/citas.xml',  # Agrega el archivo de vistas de citas
+        'views/consulta_views.xml',
         # Menús
         'views/menus.xml',
     ],

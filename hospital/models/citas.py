@@ -6,9 +6,25 @@ class Cita(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = 'Citas Médicas'
 
-    name = fields.Char(string='Referencia', required=True, copy=False, readonly=True, default='Nuevo')
-    paciente_id = fields.Many2one('clinica.paciente', string='Paciente', required=True, help='Seleccione el paciente para esta cita.')
-    especialidad_id = fields.Many2one('clinica.especialidad', string='Especialidad', required=True, help='Seleccione la especialidad.')
+    name = fields.Char(
+        string='Referencia', 
+        required=True, 
+        copy=False, 
+        readonly=True, 
+        default='Nuevo'
+    )
+    paciente_id = fields.Many2one(
+        'clinica.paciente', 
+        string='Paciente', 
+        required=True, 
+        help='Seleccione el paciente para esta cita.'
+    )
+    especialidad_id = fields.Many2one(
+        'clinica.especialidad', 
+        string='Especialidad', 
+        required=True, 
+        help='Seleccione la especialidad.'
+    )
     medico_id = fields.Many2one(
         'clinica.medico', 
         string='Médico', 
@@ -16,9 +32,18 @@ class Cita(models.Model):
         help='Seleccione el médico asociado a la especialidad seleccionada.',
         domain="[('id', 'in', available_medicos_ids)]"
     )
-    fecha_cita = fields.Datetime(string='Fecha y Hora', required=True, help='Seleccione la fecha y hora de la cita.')
+    fecha_cita = fields.Datetime(
+        string='Fecha y Hora', 
+        required=True, 
+        help='Seleccione la fecha y hora de la cita.'
+    )
     estado = fields.Selection(
-        [('draft', 'Borrador'), ('confirm', 'Confirmado'), ('done', 'Realizado'), ('cancel', 'Cancelado')],
+        [
+            ('draft', 'Borrador'), 
+            ('confirm', 'Confirmado'), 
+            ('done', 'Realizado'), 
+            ('cancel', 'Cancelado')
+        ],
         string='Estado',
         default='draft',
         tracking=True,
