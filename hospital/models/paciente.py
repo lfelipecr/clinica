@@ -27,14 +27,18 @@ TIPO_SANGRE_OPTIONS = [
 ]
 
 class HospitalPatient(models.Model):
-    _name = 'hospital.patient'
+    _name = 'clinica.paciente'
     _inherit = ['portal.mixin', 'mail.thread', 'mail.activity.mixin']
     _rec_name = 'contact_id'
-    _description = 'Patients'
+    _description = 'Pacientes'
+
+    # Activar multicompañía automáticamente para que respete el campo company_id
+    _check_company_auto = True
+
 
     sequence = fields.Char(string='Sequence', default="New", readonly=True)
     contact_id = fields.Many2one('res.partner', string='Contacto', ondelete='set null', help='Selecciona el contacto asociado a este paciente.')
-    phone = fields.Char(related='contact_id.phone', string='Teléfono', readonly=True)
+    phone = fields.Char(related='contact_id.mobile', string='Celular', readonly=True)
     email = fields.Char(related='contact_id.email', string='Correo Electrónico', readonly=True)
     nacimiento = fields.Date(string='Fecha de Nacimiento', required=False, tracking=True)
     age = fields.Integer(string='Edad', compute='_compute_age', store=False, tracking=True)
@@ -69,11 +73,20 @@ class HospitalPatient(models.Model):
     numero_abortos = fields.Integer(string='Número de Abortos', required=False)
     numero_cesareas = fields.Integer(string='Número de Cesáreas', required=False)
     fecha_ultima_citologia = fields.Date(string='Fecha de Última Citología')
-    show_ginecologicos = fields.Boolean(string="Mostrar Pestaña Ginecológicos", compute="_compute_show_ginecologicos", store=False)
+    show_ginecologicos = fields.Boolean(string="Mostrar Pestaña Ginecológicos", compute="_compute_show_ginecologicos")
     consultation_count = fields.Integer(string='Consultas', compute='_compute_consultation_count', store=False)
     appointment_count = fields.Integer(string='Citas', compute='_compute_appointment_count', store=False)
     total_invoiced = fields.Monetary(string='Monto Facturado', compute='_compute_total_invoiced', currency_field='currency_id', store=False)
     currency_id = fields.Many2one('res.currency', string='Moneda', default=lambda self: self.env.company.currency_id, required=True)
+    
+    #Con esto agregamos el campo de compañía
+    company_id = fields.Many2one(
+    'res.company',
+    string='Compañía',
+    default=lambda self: self.env.company,
+    required=True
+    )
+
 
     @api.depends('nacimiento')
     def _compute_age(self):
@@ -99,7 +112,7 @@ class HospitalPatient(models.Model):
     def create(self, vals_list):
         for vals in vals_list:
             if vals.get('sequence', _("New")) == _("New"):
-                vals['sequence'] = self.env['ir.sequence'].next_by_code('hospital.patient') or _("New")
+                vals['sequence'] = self.env['ir.sequence'].next_by_code('clinica.paciente') or _("New")
         return super(HospitalPatient, self).create(vals_list)
 
     @api.depends('gender')
@@ -107,37 +120,37 @@ class HospitalPatient(models.Model):
         for record in self:
             record.show_ginecologicos = record.gender == 'female'
 
-    def _compute_consultation_count(self):
-        for record in self:
-            record.consultation_count = self.env['hospital.consultation'].search_count([
-                ('patient_id', '=', record.id)
-            ])
+    # def _compute_consultation_count(self):
+    #     for record in self:
+    #         record.consultation_count = self.env['hospital.consultation'].search_count([
+    #             ('patient_id', '=', record.id)
+    #         ])
 
-    def action_view_consultations(self):
-        return {
-            'name': _('Consultas'),
-            'type': 'ir.actions.act_window',
-            'view_mode': 'tree,form',
-            'res_model': 'hospital.consultation',
-            'domain': [('patient_id', '=', self.id)],
-            'context': dict(self.env.context, default_patient_id=self.id),
-        }
+    # def action_view_consultations(self):
+    #     return {
+    #         'name': _('Consultas'),
+    #         'type': 'ir.actions.act_window',
+    #         'view_mode': 'tree,form',
+    #         'res_model': 'hospital.consultation',
+    #         'domain': [('patient_id', '=', self.id)],
+    #         'context': dict(self.env.context, default_patient_id=self.id),
+    #     }
 
-    def _compute_appointment_count(self):
-        for record in self:
-            record.appointment_count = self.env['hospital.appointment'].search_count([
-                ('patient_id', '=', record.id)
-            ])
+    # def _compute_appointment_count(self):
+    #     for record in self:
+    #         record.appointment_count = self.env['hospital.appointment'].search_count([
+    #             ('patient_id', '=', record.id)
+    #         ])
 
-    def action_view_appointments(self):
-        return {
-            'name': _('Citas'),
-            'type': 'ir.actions.act_window',
-            'view_mode': 'tree,form',
-            'res_model': 'hospital.appointment',
-            'domain': [('patient_id', '=', self.id)],
-            'context': dict(self.env.context, default_patient_id=self.id),
-        }
+    # def action_view_appointments(self):
+    #     return {
+    #         'name': _('Citas'),
+    #         'type': 'ir.actions.act_window',
+    #         'view_mode': 'tree,form',
+    #         'res_model': 'hospital.appointment',
+    #         'domain': [('patient_id', '=', self.id)],
+    #         'context': dict(self.env.context, default_patient_id=self.id),
+    #     }
 
     def _compute_total_invoiced(self):
         for record in self:

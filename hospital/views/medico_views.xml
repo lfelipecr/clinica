@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Acción para abrir la vista de médicos -->
+    <record id="action_medico" model="ir.actions.act_window">
+        <field name="name">Médicos</field>
+        <field name="res_model">clinica.medico</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crea tu primer médico
+            </p>
+        </field>
+    </record>
+
+    <!-- Vista Tree (Lista) para Médicos -->
+    <record id="view_tree_medico" model="ir.ui.view">
+        <field name="name">clinica.medico.tree</field>
+        <field name="model">clinica.medico</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="specialty"/>
+                <field name="phone"/>
+                <field name="email"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Vista Form para Médicos -->
+    <record id="view_form_medico" model="ir.ui.view">
+        <field name="name">clinica.medico.form</field>
+        <field name="model">clinica.medico</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name"/>
+                        <field name="specialty"/>
+                        <field name="license_number"/>
+                    </group>
+                    <group>
+                        <field name="phone" readonly="1"/>
+                        <field name="email" readonly="1"/>
+                        <field name="active"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+</odoo>

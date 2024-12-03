@@ -1,31 +1,14 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_hospital_patient,hospital_patient,model_hospital_patient,group_hospital_manager,1,1,1,1
-access_hospital_doctor,hospital_doctor,model_hospital_doctor,group_hospital_manager,1,1,1,1
-access_hospital_appointment,hospital_appointment,model_hospital_appointment,group_hospital_manager,,1,1,1,1
-access_hospital_consultation,hospital.consultation,model_hospital_consultation,group_hospital_manager,1,1,1,1
-access_hospital_prescription,hospital_prescription,model_hospital_prescription,group_hospital_manager,1,1,1,1
-access_hospital_consultation_type_manager,hospital_consultation_type_manager,model_hospital_consultation_type,group_hospital_manager,1,1,1,1
-access_hospital_exam_type_user,hospital.exam.type,model_hospital_exam_type,group_hospital_manager,1,1,1,1
-access_hospital_exam_manager,hospital.exam.manager,model_hospital_exam,group_hospital_manager,1,1,1,1
+access_clinica_paciente_manager,clinica_paciente_manager,model_clinica_paciente,group_clinica_manager,1,1,1,1
+access_clinica_medico_manager,access.clinica.medico.manager,model_clinica_medico,group_clinica_manager,1,1,1,1
+access_clinica_especialidad_manager,clinica_especialidad_manager,model_clinica_especialidad,group_clinica_manager,1,1,1,1
+access_clinica_cita_manager,clinica_cita_manager,model_clinica_cita,group_clinica_manager,1,1,1,1
 
 
-
-access_hospital_patient,hospital_patient,model_hospital_patient,group_hospital_employee,1,1,1,1
-access_hospital_doctor,hospital_doctor,model_hospital_doctor,group_hospital_employee,1,1,1,1
-access_hospital_appointment,hospital_appointment,model_hospital_appointment,group_hospital_employee,1,1,1,1
-access_hospital_consultation,hospital.consultation,model_hospital_consultation,group_hospital_employee,1,1,1,1
-access_hospital_prescription,hospital_prescription,model_hospital_prescription,group_hospital_employee,1,1,1,1
-access_hospital_consultation_type_manager,hospital_consultation_type_manager,model_hospital_consultation_type,group_hospital_employee,1,1,1,1
-access_hospital_exam_type_user,hospital.exam.type,model_hospital_exam_type,group_hospital_employee,1,1,1,1
-access_hospital_exam_user,hospital.exam.user,model_hospital_exam,group_hospital_employee,1,1,1,1
-
-
-
-
-
-
-
-
+access_clinica_paciente_employee,clinica_paciente_employee,model_clinica_paciente,group_clinica_employee,1,1,1,1
+access_clinica_medico_user,access.clinica.medico.user,model_clinica_medico,group_clinica_employee,1,1,1,1
+access_clinica_especialidad_employee,clinica_especialidad_employee,model_clinica_especialidad,group_clinica_employee,1,1,1,1
+access_clinica_cita_employee,clinica_cita_employee,model_clinica_cita,group_clinica_employee,1,1,1,1
 
 
 

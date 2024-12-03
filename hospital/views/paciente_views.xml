@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <!-- Acción para abrir la vista de pacientes -->
+    <record id="action_paciente" model="ir.actions.act_window">
+        <field name="name">Pacientes</field>
+        <field name="res_model">clinica.paciente</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                Crea tu primer paciente
+            </p>
+        </field>
+    </record>
+
+    <!-- Vista Tree (Lista) para Pacientes -->
+    <record id="view_tree_paciente" model="ir.ui.view">
+        <field name="name">clinica.paciente.tree</field>
+        <field name="model">clinica.paciente</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="sequence"/>
+                <field name="contact_id"/>
+                <field name="nacimiento"/>
+                <field name="age"/>
+                <field name="gender"/>
+                <!-- company_id no se muestra en Tree -->
+            </tree>
+        </field>
+    </record>
+
+    <!-- Vista Form para Pacientes -->
+    <record id="view_form_paciente" model="ir.ui.view">
+        <field name="name">clinica.paciente.form</field>
+        <field name="model">clinica.paciente</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="sequence" readonly="1"/>
+                        <field name="contact_id"/>
+                        <field name="phone" readonly="1"/>
+                        <field name="email" readonly="1"/>
+                        <field name="nacimiento"/>
+                        <field name="age" readonly="1"/>
+                        <field name="gender"/>
+                        <!-- Campo oculto -->
+                        <field name="company_id" invisible="1"/>
+                          <!-- Campo oculto para evaluación de visibilidad -->
+                        <field name="show_ginecologicos" invisible="1"/>
+                    </group>
+                    <group>
+                        <field name="peso"/>
+                        <field name="altura"/>
+                        <field name="imc" readonly="1"/>
+                        <field name="tipo_sangre"/>
+                    </group>
+                    <group string="Información Médica">
+                        <field name="diabetico"/>
+                        <field name="hipertenso"/>
+                        <field name="vacunas"/>
+                        <field name="alergias"/>
+                    </group>
+                    <notebook>
+                        <page string="Antecedentes">
+                            <group>
+                                <field name="antecedentes_personales"/>
+                                <field name="antecedentes_heredofamiliares"/>
+                                <field name="antecedentes_quirurgicos"/>
+                            </group>
+                        </page>
+                        <page string="Hábitos">
+                            <group>
+                                <field name="fuma"/>
+                                <field name="alcohol"/>
+                                <field name="drogas"/>
+                                <field name="cocina_lena"/>
+                            </group>
+                        </page>
+                        <page string="Medicamentos">
+                            <field name="medicamentos_actuales"/>
+                        </page>
+                        <page string="Ginecológicos" invisible="show_ginecologicos == False">
+                            <group>
+                                <field name="sexualmente_activo"/>
+                                <field name="metodo_planificacion"/>
+                                <field name="numero_embarazos"/>
+                                <field name="numero_partos"/>
+                                <field name="numero_abortos"/>
+                                <field name="numero_cesareas"/>
+                                <field name="fecha_ultima_citologia"/>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <!-- Agregar Chatter -->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+</odoo>

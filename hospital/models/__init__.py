@@ -1,9 +1,7 @@
-from . import hospital_patient
-from . import hospital_doctor
-from . import hospital_appoitment
-from . import hospital_consultation
-from . import hospital_prescription
-from . import hospital_consultation_type
-from . import hospital_exam_type
-from . import hospital_exam
+from . import paciente
+from . import medico
+from . import especialidad
+from . import citas
+
+
 

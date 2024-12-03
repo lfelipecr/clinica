@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <data>
+
+        <!-- Categorías de Seguridad -->
+        <record model="ir.module.category" id="category_clinica">
+            <field name="name">Clínica</field>
+            <field name="sequence">20</field>
+        </record>
+        <record model="ir.module.category" id="category_clinica_pacientes">
+            <field name="name">Pacientes</field>
+            <field name="parent_id" ref="category_clinica"/>
+            <field name="sequence">50</field>
+        </record>
+
+        <!-- Grupos -->
+        <record id="group_clinica_employee" model="res.groups">
+            <field name="name">Empleado</field>
+            <field name="category_id" ref="category_clinica_pacientes"/>
+        </record>
+
+        <record id="group_clinica_manager" model="res.groups">
+            <field name="name">Gerente</field>
+            <field name="category_id" ref="category_clinica_pacientes"/>
+            <field name="implied_ids" eval="[(4, ref('group_clinica_employee'))]"/>
+            <field name="users" eval="[(4, ref('base.user_root'))]"/>
+        </record>
+
+        <!-- Permisos de Acceso -->
+        <record id="access_clinica_paciente_user" model="ir.model.access">
+            <field name="name">Access for Employees - Pacientes</field>
+            <field name="model_id" ref="model_clinica_paciente"/>
+            <field name="group_id" ref="group_clinica_employee"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+        </record>
+
+        <record id="access_clinica_paciente_manager" model="ir.model.access">
+            <field name="name">Access for Managers - Pacientes</field>
+            <field name="model_id" ref="model_clinica_paciente"/>
+            <field name="group_id" ref="group_clinica_manager"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+        
+        <record id="access_clinica_medico_user" model="ir.model.access">
+            <field name="name">Access for Employees - Médicos</field>
+            <field name="model_id" ref="model_clinica_medico"/>
+            <field name="group_id" ref="group_clinica_employee"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="0"/>
+            <field name="perm_create" eval="0"/>
+            <field name="perm_unlink" eval="0"/>
+        </record>
+
+        <record id="access_clinica_medico_manager" model="ir.model.access">
+            <field name="name">Access for Managers - Médicos</field>
+            <field name="model_id" ref="model_clinica_medico"/>
+            <field name="group_id" ref="group_clinica_manager"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+
+    </data>
+</odoo>
