@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <!-- Menú Principal -->
     <menuitem id="menu_clinica_root" name="Clínica" sequence="10" />
@@ -8,5 +9,5 @@
     <menuitem id="menu_clinica_citas" name="Citas" parent="menu_clinica_root" action="action_cita" sequence="30"/>
     <menuitem id="menu_clinica_consultas" name="Consultas" parent="menu_clinica_root" action="action_consulta" sequence="40"/>
     <menuitem id="menu_clinica_especialidades" name="Especialidades" parent="menu_clinica_root" action="action_especialidad" sequence="50"/>
-
+    <menuitem id="menu_clinica_recetas" name="Recetas" parent="menu_clinica_root" action="action_receta" sequence="60"/>
 </odoo>

@@ -67,6 +67,46 @@
             <field name="perm_unlink" eval="1"/>
         </record>
 
+        <record id="access_clinica_receta_user" model="ir.model.access">
+            <field name="name">Access for Employees - Recetas</field>
+            <field name="model_id" ref="model_clinica_receta"/>
+            <field name="group_id" ref="group_clinica_employee"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+        </record>
+
+        <record id="access_clinica_receta_manager" model="ir.model.access">
+            <field name="name">Access for Managers - Recetas</field>
+            <field name="model_id" ref="model_clinica_receta"/>
+            <field name="group_id" ref="group_clinica_manager"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+
+        <record id="access_clinica_receta_linea_user" model="ir.model.access">
+            <field name="name">Access for Employees - Líneas de Recetas</field>
+            <field name="model_id" ref="model_clinica_receta_linea"/>
+            <field name="group_id" ref="group_clinica_employee"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="0"/>
+        </record>
+
+        <record id="access_clinica_receta_linea_manager" model="ir.model.access">
+            <field name="name">Access for Managers - Líneas de Recetas</field>
+            <field name="model_id" ref="model_clinica_receta_linea"/>
+            <field name="group_id" ref="group_clinica_manager"/>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+        </record>
+
         <!-- Reglas de Registro -->
         <record id="rule_clinica_paciente_company" model="ir.rule">
             <field name="name">Pacientes: Restringir por Compañía</field>

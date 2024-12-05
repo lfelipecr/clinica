@@ -119,6 +119,13 @@ class Consulta(models.Model):
         help='Indique si el paciente tiene alergias conocidas. Si se modifica, se actualizará en la ficha del paciente.'
     )
 
+    temperatura = fields.Float(string='Temperatura (°C)', help='Temperatura del paciente.')
+    presion_sanguinea = fields.Char(string='Presión Sanguínea', help='Ejemplo: 120/80')
+    nivel_oxigeno = fields.Float(string='Nivel de Oxígeno (%)', help='Nivel de oxígeno en sangre.')
+    glicemia = fields.Float(string='Glicemia (mg/dL)', help='Nivel de azúcar en sangre.')
+    receta_ids = fields.One2many('clinica.receta', 'consulta_id', string='Recetas')
+
+
     @api.onchange('paciente_id')
     def _onchange_paciente_id(self):
         for record in self:

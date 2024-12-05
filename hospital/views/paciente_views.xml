@@ -1,3 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <!-- Acción para abrir la vista de pacientes -->
     <record id="action_paciente" model="ir.actions.act_window">
