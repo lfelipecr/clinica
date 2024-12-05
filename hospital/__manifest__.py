@@ -17,6 +17,7 @@
         'views/medico_views.xml',
         'views/especialidad_views.xml',
         'views/citas.xml',  # Agrega el archivo de vistas de citas
+        'views/examen_views.xml', 
         'views/consulta_views.xml',
         'views/product_template_views.xml',
         'views/receta_views.xml',  # Vistas para recetas

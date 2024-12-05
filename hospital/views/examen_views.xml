@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+    <record id="view_tree_examen" model="ir.ui.view">
+        <field name="name">clinica.examen.tree</field>
+        <field name="model">clinica.examen</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="tipo_examen"/>
+                <field name="fecha_solicitud"/>
+                <field name="consulta_id"/>
+                <field name="medico_id"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_form_examen" model="ir.ui.view">
+        <field name="name">clinica.examen.form</field>
+        <field name="model">clinica.examen</field>
+        <field name="arch" type="xml">
+            <form>
+                <sheet>
+                    <group>
+                        <field name="name" readonly="1"/>
+                        <field name="tipo_examen" required="1"/>
+                        <field name="notas"/>
+                        <field name="fecha_solicitud"/>
+                        <field name="consulta_id"/>
+                        <field name="medico_id"/>
+                        <field name="fecha_realizacion"/>
+                        <field name="resultado"/>
+                        <field name="archivo_resultado" filename="archivo_nombre"/>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+    <!-- Acción para Exámenes -->
+    <record id="action_examen" model="ir.actions.act_window">
+        <field name="name">Exámenes</field>
+        <field name="res_model">clinica.examen</field>
+        <field name="view_mode">tree,form</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+                No hay exámenes registrados. Crea un nuevo examen.
+            </p>
+        </field>
+    </record>
+</odoo>

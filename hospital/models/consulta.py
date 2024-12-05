@@ -124,6 +124,8 @@ class Consulta(models.Model):
     nivel_oxigeno = fields.Float(string='Nivel de Oxígeno (%)', help='Nivel de oxígeno en sangre.')
     glicemia = fields.Float(string='Glicemia (mg/dL)', help='Nivel de azúcar en sangre.')
     receta_ids = fields.One2many('clinica.receta', 'consulta_id', string='Recetas')
+    examen_ids = fields.One2many('clinica.examen', 'consulta_id', string='Exámenes Asociados')
+
 
 
     @api.onchange('paciente_id')

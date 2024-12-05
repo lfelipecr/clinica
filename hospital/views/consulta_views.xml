@@ -69,6 +69,25 @@
                                     </tree>
                                 </field>
                             </page>
+                        <page string="Exámenes">
+                            <field name="examen_ids" context="{'default_consulta_id': id, 'default_medico_id': medico_id}">
+                                <tree editable="bottom">
+                                    <field name="name"/>
+                                    <field name="tipo_examen"/>
+                                    <field name="fecha_solicitud"/>
+                                    <field name="fecha_realizacion"/>
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="tipo_examen"/>
+                                        <field name="notas"/>
+                                        <field name="fecha_realizacion"/>
+                                        <field name="resultado"/>
+                                        <field name="archivo_resultado" filename="archivo_nombre"/>
+                                    </group>
+                                </form>
+                            </field>
+                        </page>
                     </notebook>
                 </sheet>
             </form>

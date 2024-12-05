@@ -5,6 +5,7 @@ from . import citas
 from . import consulta
 from . import receta
 from . import product_template
+from . import examen
 
 
 

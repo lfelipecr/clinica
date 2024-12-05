@@ -10,4 +10,5 @@
     <menuitem id="menu_clinica_consultas" name="Consultas" parent="menu_clinica_root" action="action_consulta" sequence="40"/>
     <menuitem id="menu_clinica_especialidades" name="Especialidades" parent="menu_clinica_root" action="action_especialidad" sequence="50"/>
     <menuitem id="menu_clinica_recetas" name="Recetas" parent="menu_clinica_root" action="action_receta" sequence="60"/>
+    <menuitem id="menu_clinica_examenes" name="Exámenes" parent="menu_clinica_root" action="action_examen" sequence="70"/>
 </odoo>
