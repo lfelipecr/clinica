@@ -17,5 +17,14 @@
             <field name="padding">4</field>
             <field name="company_id" eval="False"/>
         </record>
+
+        <!-- Secuencia para Consultas Médicas -->
+        <record id="sequence_clinica_consulta" model="ir.sequence">
+            <field name="name">Clinic Consultation Sequence</field>
+            <field name="code">clinica.consulta</field>
+            <field name="prefix">CONS-</field>
+            <field name="padding">4</field>
+            <field name="company_id" eval="False"/>
+        </record>
     </data>
 </odoo>

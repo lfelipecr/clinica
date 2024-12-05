@@ -4,7 +4,6 @@ class Medico(models.Model):
     _name = 'clinica.medico'
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = 'Médicos'
-
     _check_company_auto = True  # Activa la validación automática de compañía
 
     name = fields.Many2one(

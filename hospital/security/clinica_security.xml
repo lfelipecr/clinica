@@ -67,5 +67,20 @@
             <field name="perm_unlink" eval="1"/>
         </record>
 
+        <!-- Reglas de Registro -->
+        <record id="rule_clinica_paciente_company" model="ir.rule">
+            <field name="name">Pacientes: Restringir por Compañía</field>
+            <field name="model_id" ref="model_clinica_paciente"/>
+            <field name="domain_force">[('company_id', '=', user.company_id and user.company_id.id or False)]</field>
+            <field name="groups" eval="[(4, ref('group_clinica_employee')), (4, ref('group_clinica_manager'))]"/>
+        </record>
+
+        <record id="rule_clinica_medico_company" model="ir.rule">
+            <field name="name">Médicos: Restringir por Compañía</field>
+            <field name="model_id" ref="model_clinica_medico"/>
+            <field name="domain_force">[('company_id', '=', user.company_id and user.company_id.id or False)]</field>
+            <field name="groups" eval="[(4, ref('group_clinica_employee')), (4, ref('group_clinica_manager'))]"/>
+        </record>
+
     </data>
 </odoo>

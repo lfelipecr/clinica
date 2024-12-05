@@ -35,7 +35,6 @@ class HospitalPatient(models.Model):
     # Activar multicompañía automáticamente para que respete el campo company_id
     _check_company_auto = True
 
-
     sequence = fields.Char(string='Sequence', default="New", readonly=True)
     contact_id = fields.Many2one('res.partner', string='Contacto', ondelete='set null', help='Selecciona el contacto asociado a este paciente.')
     phone = fields.Char(related='contact_id.mobile', string='Celular', readonly=True)
@@ -79,14 +78,12 @@ class HospitalPatient(models.Model):
     total_invoiced = fields.Monetary(string='Monto Facturado', compute='_compute_total_invoiced', currency_field='currency_id', store=False)
     currency_id = fields.Many2one('res.currency', string='Moneda', default=lambda self: self.env.company.currency_id, required=True)
     
-    #Con esto agregamos el campo de compañía
     company_id = fields.Many2one(
-    'res.company',
-    string='Compañía',
-    default=lambda self: self.env.company,
-    required=True
+        'res.company',
+        string='Compañía',
+        default=lambda self: self.env.company,
+        required=True
     )
-
 
     @api.depends('nacimiento')
     def _compute_age(self):
@@ -119,8 +116,6 @@ class HospitalPatient(models.Model):
     def _compute_show_ginecologicos(self):
         for record in self:
             record.show_ginecologicos = record.gender == 'female'
-
-
 
     def _compute_total_invoiced(self):
         for record in self:

@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
     <!-- Acción para abrir la vista de pacientes -->
     <record id="action_paciente" model="ir.actions.act_window">
@@ -23,7 +22,6 @@
                 <field name="nacimiento"/>
                 <field name="age"/>
                 <field name="gender"/>
-                <!-- company_id no se muestra en Tree -->
             </tree>
         </field>
     </record>
@@ -43,9 +41,7 @@
                         <field name="nacimiento"/>
                         <field name="age" readonly="1"/>
                         <field name="gender"/>
-                        <!-- Campo oculto -->
                         <field name="company_id" invisible="1"/>
-                          <!-- Campo oculto para evaluación de visibilidad -->
                         <field name="show_ginecologicos" invisible="1"/>
                     </group>
                     <group>
@@ -92,7 +88,6 @@
                         </page>
                     </notebook>
                 </sheet>
-                <!-- Agregar Chatter -->
                 <div class="oe_chatter">
                     <field name="message_follower_ids" widget="mail_followers"/>
                     <field name="message_ids" widget="mail_thread"/>

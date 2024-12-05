@@ -6,7 +6,7 @@ class Consulta(models.Model):
     _inherit = ['mail.thread', 'mail.activity.mixin']
     _description = 'Consultas Médicas'
     _rec_name = 'name'  # Usar el campo 'name' como identificador principal
-
+    _check_company_auto = True
 
 
     name = fields.Char(
@@ -61,6 +61,14 @@ class Consulta(models.Model):
         store=True,
         help='Especialidad de la consulta. Si está asociada a una cita, será la misma.'
     )
+    medico_id = fields.Many2one(
+        'clinica.medico',
+        string='Médico',
+        compute='_compute_medico_id',
+        store=True,
+        readonly=False,
+        help='Médico que atiende esta consulta. Si hay una cita asociada, será el mismo médico de la cita.'
+    )
     notas = fields.Text(
         string='Notas',
         help='Notas adicionales sobre la consulta.'
@@ -76,17 +84,14 @@ class Consulta(models.Model):
     # Campos relacionados con información del paciente
     hipertenso = fields.Boolean(
         string='¿Hipertenso?',
-        related='paciente_id.hipertenso',
         readonly=True
     )
     diabetico = fields.Boolean(
         string='¿Diabético?',
-        related='paciente_id.diabetico',
         readonly=True
     )
     peso = fields.Integer(
         string='Peso (kg)',
-        default=0,
         help='Indique el peso del paciente. Si se modifica, se actualizará en la ficha del paciente.'
     )
     imc = fields.Float(
@@ -114,10 +119,25 @@ class Consulta(models.Model):
         help='Indique si el paciente tiene alergias conocidas. Si se modifica, se actualizará en la ficha del paciente.'
     )
 
+    @api.onchange('paciente_id')
+    def _onchange_paciente_id(self):
+        for record in self:
+            if record.paciente_id:
+                record.hipertenso = record.paciente_id.hipertenso
+                record.diabetico = record.paciente_id.diabetico
+                record.peso = record.paciente_id.peso
+                record.tipo_sangre = record.paciente_id.tipo_sangre
+                record.alergias = record.paciente_id.alergias
+
     @api.depends('cita_id')
     def _compute_especialidad_id(self):
         for record in self:
             record.especialidad_id = record.cita_id.especialidad_id if record.cita_id else False
+
+    @api.depends('cita_id')
+    def _compute_medico_id(self):
+        for record in self:
+            record.medico_id = record.cita_id.medico_id if record.cita_id else False
 
     @api.depends('peso', 'paciente_id.altura')
     def _compute_imc(self):
@@ -130,6 +150,8 @@ class Consulta(models.Model):
 
     @api.model
     def create(self, vals):
+        if vals.get('name', 'Nuevo') == 'Nuevo':
+            vals['name'] = self.env['ir.sequence'].next_by_code('clinica.consulta') or 'Nuevo'
         consulta = super(Consulta, self).create(vals)
         consulta._update_paciente_fields()
         return consulta

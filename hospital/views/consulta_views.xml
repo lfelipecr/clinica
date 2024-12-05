@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <!-- Acción para abrir la vista de consultas -->
     <record id="action_consulta" model="ir.actions.act_window">
         <field name="name">Consultas</field>
         <field name="res_model">clinica.consulta</field>
@@ -12,22 +11,20 @@
         </field>
     </record>
 
-    <!-- Vista Tree para Consultas -->
     <record id="view_tree_consulta" model="ir.ui.view">
         <field name="name">clinica.consulta.tree</field>
         <field name="model">clinica.consulta</field>
         <field name="arch" type="xml">
             <tree>
+                <field name="name"/>
                 <field name="paciente_id"/>
                 <field name="fecha_consulta"/>
-                <field name="motivo"/>
                 <field name="especialidad_id"/>
-                <field name="company_id" invisible="1"/>
+                <field name="medico_id"/>
             </tree>
         </field>
     </record>
 
-    <!-- Vista Form para Consultas -->
     <record id="view_form_consulta" model="ir.ui.view">
         <field name="name">clinica.consulta.form</field>
         <field name="model">clinica.consulta</field>
@@ -35,16 +32,14 @@
             <form>
                 <sheet>
                     <group>
+                        <field name="name" readonly="1"/>
                         <field name="paciente_id" required="1"/>
-                        <field name="phone" readonly="1"/>
-                        <field name="email" readonly="1"/>
-                        <field name="age" readonly="1"/>
                         <field name="fecha_consulta" required="1"/>
-                        <field name="motivo" required="1"/>
+                        <field name="especialidad_id" readonly="1"/>
+                        <field name="medico_id"/>
                         <field name="cita_id"/>
-                        <field name="especialidad_id"/>
-                        <field name="notas"/>
-                        <field name="company_id" readonly="1" invisible="1"/>
+                        <field name="motivo" required="1"/>
+                        <field name="notas" placeholder="Notas adicionales..."/>
                     </group>
                     <notebook>
                         <page string="Información del Paciente">
