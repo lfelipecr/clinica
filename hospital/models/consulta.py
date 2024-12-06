@@ -125,6 +125,11 @@ class Consulta(models.Model):
     glicemia = fields.Float(string='Glicemia (mg/dL)', help='Nivel de azúcar en sangre.')
     receta_ids = fields.One2many('clinica.receta', 'consulta_id', string='Recetas')
     examen_ids = fields.One2many('clinica.examen', 'consulta_id', string='Exámenes Asociados')
+    diagnostico = fields.Text(
+    string='Diagnóstico',
+    help='Especifique el diagnóstico asociado a la consulta.'
+    )
+
 
 
 

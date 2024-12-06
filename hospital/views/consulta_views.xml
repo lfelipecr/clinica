@@ -40,6 +40,8 @@
                         <field name="cita_id"/>
                         <field name="motivo" required="1"/>
                         <field name="notas" placeholder="Notas adicionales..."/>
+                        <field name="diagnostico" placeholder="Ingrese el diagnóstico..."/>
+
                     </group>
                     <notebook>
                         <page string="Información del Paciente">
@@ -71,25 +73,20 @@
                             </page>
                         <page string="Exámenes">
                             <field name="examen_ids" context="{'default_consulta_id': id, 'default_medico_id': medico_id}">
-                                <tree editable="bottom">
+                                <tree>
                                     <field name="name"/>
                                     <field name="tipo_examen"/>
                                     <field name="fecha_solicitud"/>
-                                    <field name="fecha_realizacion"/>
+                                    <field name="resultado"/>   
                                 </tree>
-                                <form>
-                                    <group>
-                                        <field name="tipo_examen"/>
-                                        <field name="notas"/>
-                                        <field name="fecha_realizacion"/>
-                                        <field name="resultado"/>
-                                        <field name="archivo_resultado" filename="archivo_nombre"/>
-                                    </group>
-                                </form>
                             </field>
                         </page>
                     </notebook>
                 </sheet>
+                    <!-- Agregar el chatter debajo del formulario -->
+                <div class="oe_chatter">
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
             </form>
         </field>
     </record>

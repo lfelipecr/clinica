@@ -18,6 +18,8 @@ class Medico(models.Model):
     phone = fields.Char(related='name.work_phone', string='Teléfono', readonly=True)
     email = fields.Char(related='name.work_email', string='Correo Electrónico', readonly=True)
     active = fields.Boolean(string='Activo', default=True)
+    consulta_id = fields.Many2one('clinica.consulta', string='Consulta', help='Consulta asociada, si aplica.')
+
 
     # Campo de compañía
     company_id = fields.Many2one(
