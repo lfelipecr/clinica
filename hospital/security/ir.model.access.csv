@@ -17,3 +17,5 @@ access_clinica_consulta_employee,clinica_consulta_employee,model_clinica_consult
 access_clinica_receta_employee,clinica_receta_employee,model_clinica_receta,group_clinica_employee,1,1,1,1
 access_clinica_receta_linea_employee,clinica_receta_linea_employee,model_clinica_receta_linea,group_clinica_employee,1,1,1,0
 access_clinica_examen_employee,clinica_examen_employee,model_clinica_examen,group_clinica_employee,1,1,1,0
+
+access_clinica_cita_portal,clinica_cita_portal,model_clinica_cita,base.group_portal,1,0,1,0

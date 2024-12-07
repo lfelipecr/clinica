@@ -121,6 +121,13 @@
             <field name="domain_force">[('company_id', '=', user.company_id and user.company_id.id or False)]</field>
             <field name="groups" eval="[(4, ref('group_clinica_employee')), (4, ref('group_clinica_manager'))]"/>
         </record>
+           <!-- Regla de acceso para usuarios del portal -->
+        <record id="rule_portal_cita" model="ir.rule">
+            <field name="name">Portal: Acceso a Citas</field>
+            <field name="model_id" ref="model_clinica_cita"/>
+            <field name="groups" eval="[(4, ref('base.group_portal'))]"/>
+            <field name="domain_force">[('paciente_id', '=', user.partner_id.id)]</field>
+        </record>
 
     </data>
 </odoo>
