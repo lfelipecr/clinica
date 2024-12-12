@@ -24,6 +24,7 @@ class CitaController(http.Controller):
         _logger.info(f"Session ID de la cookie: {session_id}")
         _logger.info(f"Session context: {request.session}")
         _logger.info(f"CSRF token generado: {request.csrf_token()}")
+        _logger.info(f"Datos enviados: {post}")
 
 
         # Validar el token CSRF
