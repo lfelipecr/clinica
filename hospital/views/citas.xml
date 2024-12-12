@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <!-- Acción para abrir la vista de citas -->
+    <!-- Acción para abrir las vistas de citas -->
     <record id="action_cita" model="ir.actions.act_window">
         <field name="name">Citas</field>
         <field name="res_model">clinica.cita</field>
-        <field name="view_mode">tree,form</field>
+        <field name="view_mode">tree,calendar,form</field> <!-- Agregamos 'calendar' -->
         <field name="help" type="html">
             <p class="o_view_nocontent_smiling_face">
                 No hay citas registradas. Crea una nueva cita.
@@ -20,11 +20,23 @@
             <tree>
                 <field name="name"/>
                 <field name="paciente_id"/>
-                <field name="especialidad_id"/>
                 <field name="medico_id"/>
                 <field name="fecha_cita"/>
                 <field name="estado" widget="statusbar"/>
             </tree>
+        </field>
+    </record>
+
+    <!-- Vista Calendar para Citas -->
+    <record id="view_calendar_cita" model="ir.ui.view">
+        <field name="name">clinica.cita.calendar</field>
+        <field name="model">clinica.cita</field>
+        <field name="arch" type="xml">
+            <calendar string="Calendario de Citas" date_start="fecha_cita">
+                <field name="paciente_id"/>
+                <field name="medico_id"/>
+                <field name="estado"/>
+            </calendar>
         </field>
     </record>
 
@@ -35,28 +47,25 @@
         <field name="arch" type="xml">
             <form>
                 <header>
-                    <!-- Mover los botones al encabezado -->
+                    <!-- Botones en el encabezado -->
                     <button name="action_confirm" type="object" string="Confirmar" class="btn-primary"/>
                     <button name="action_done" type="object" string="Realizar" class="btn-success"/>
                     <button name="action_cancel" type="object" string="Cancelar" class="btn-secondary"/>
                 </header>
                 <sheet>
                     <div class="oe_title">
-                        <!-- Barra de estado sin etiqueta, alineada a la derecha -->
+                        <!-- Barra de estado alineada a la derecha -->
                         <field name="estado" widget="statusbar" options="{'clickable': True}" class="o_statusbar_right"/>
                     </div>
-                    <!-- Campo invisible requerido para el dominio del campo 'medico_id' -->
-                    <field name="available_medicos_ids" invisible="1"/>
                     <group>
                         <field name="name" readonly="1"/>
                         <field name="paciente_id" required="1"/>
-                        <field name="especialidad_id" required="1"/>
-                        <field name="medico_id" domain="[('id', 'in', available_medicos_ids)]" required="1"/>
+                        <field name="medico_id" required="1"/>
                         <field name="fecha_cita" required="1"/>
                         <field name="notes"/>
                     </group>
                 </sheet>
-                <!-- Agregar Chatter -->
+                <!-- Chatter para seguidores y mensajes -->
                 <div class="oe_chatter">
                     <field name="message_follower_ids" widget="mail_followers"/>
                     <field name="message_ids" widget="mail_thread"/>

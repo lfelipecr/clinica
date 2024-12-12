@@ -21,14 +21,10 @@
         'views/product_template_views.xml',
         'views/receta_views.xml',  # Vistas para recetas
         'views/menus.xml',
-        # Plantillas del sitio web
-        'views/cita_templates.xml',
+        'views/cita_templates.xml', # Agrega el archivo de plantillas de citas
+  
     ],
-    'assets': {
-        'web.assets_frontend': [
-            'hospital/static/src/js/cita_form.js',
-        ],
-    },
+ 
     'installable': True,
     'application': True,
     'auto_install': False,  # Corregido el nombre de la clave

@@ -1,37 +1,75 @@
 from odoo import http
 from odoo.http import request
+from datetime import datetime
+import logging
 
-class CitasController(http.Controller):
+_logger = logging.getLogger(__name__)
 
-    @http.route('/solicitarcita', type='http', auth='public', website=True)
-    def cita_form(self, **kw):
-        especialidades = request.env['clinica.especialidad'].sudo().search([])
-        return request.render('hospital.cita_form_template', {
-            'especialidades': especialidades,
-        })
+class CitaController(http.Controller):
 
-    @http.route('/crearcita', type='http', auth='public', website=True, methods=['POST'])
-    def crear_cita(self, **post):
-        paciente = request.env['res.partner'].sudo().search([('email', '=', post.get('email'))], limit=1)
-        if not paciente:
-            paciente = request.env['res.partner'].sudo().create({
-                'name': post.get('nombre'),
-                'email': post.get('email'),
-                'phone': post.get('telefono'),
+    @http.route('/solicitar_cita', type='http', auth='public', website=True)
+    def solicitar_cita_form(self, **kwargs):
+        """Renderiza el formulario público para solicitar una cita."""
+        medicos = request.env['clinica.medico'].sudo().search([])
+        return request.render('hospital.cita_form_new', {'medicos': medicos})
+
+    @http.route('/enviar_cita', type='http', auth='public', website=True, methods=['POST'], csrf=True)
+    def enviar_cita(self, **post):
+        """Procesa los datos enviados desde el formulario."""
+        # Capturar el token CSRF desde el formulario
+        csrf_token = post.get('csrf_token')
+        session_id = request.httprequest.cookies.get('session_id')
+        _logger.info(f"CSRF token recibido: {csrf_token}")
+        _logger.info(f"CSRF token esperado: {request.csrf_token()}")
+        _logger.info(f"Session ID de la cookie: {session_id}")
+        _logger.info(f"Session context: {request.session}")
+        _logger.info(f"CSRF token generado: {request.csrf_token()}")
+
+
+        # Validar el token CSRF
+        if not csrf_token or csrf_token != request.csrf_token():
+            _logger.warning("CSRF token no válido o ausente.")
+            return request.render('hospital.cita_form_new', {
+                'error': '<div style="color: red;">Token CSRF inválido. Por favor, intente nuevamente.</div>',
+                'medicos': request.env['clinica.medico'].sudo().search([])
             })
 
+        # Datos del formulario
+        nombre = post.get('nombre')
+        correo = post.get('correo')
+        telefono = post.get('telefono')
+        fecha_cita = post.get('fecha_cita')
+        medico_id = int(post.get('medico_id'))
+        observaciones = post.get('observaciones')
+
+        # Validaciones básicas
+        if not nombre or not correo or not telefono or not fecha_cita or not medico_id:
+            return request.render('hospital.cita_form_new', {
+                'error': 'Todos los campos son obligatorios',
+                'medicos': request.env['clinica.medico'].sudo().search([])
+            })
+
+        # Verificar si existe un paciente con el correo o teléfono
+        paciente = request.env['clinica.paciente'].sudo().search(
+            ['|', ('email', '=', correo), ('telefono', '=', telefono)], limit=1
+        )
+
+        # Si no existe, creamos un nuevo paciente
+        if not paciente:
+            paciente = request.env['clinica.paciente'].sudo().create({
+                'name': nombre,
+                'email': correo,
+                'telefono': telefono
+            })
+
+        # Crear la cita
         request.env['clinica.cita'].sudo().create({
             'paciente_id': paciente.id,
-            'especialidad_id': int(post.get('especialidad')),
-            'medico_id': int(post.get('medico')),
-            'fecha_cita': post.get('fecha_hora'),
-            'comentarios': post.get('comentarios'),
+            'medico_id': medico_id,
+            'fecha_cita': datetime.strptime(fecha_cita, '%Y-%m-%d %H:%M:%S'),
+            'notes': observaciones,
+            'estado': 'draft'
         })
 
-        return request.render('hospital.cita_confirmacion_template', {})
-
-    @http.route('/hospital/obtenermedicos', type='json', auth='public')
-    def obtener_medicos(self, especialidad_id):
-        especialidad = request.env['clinica.especialidad'].sudo().browse(int(especialidad_id))
-        medicos = especialidad.medico_ids
-        return [{'id': medico.id, 'name': medico.name.name} for medico in medicos]
+        # Mensaje de éxito
+        return request.render('hospital.cita_success', {})

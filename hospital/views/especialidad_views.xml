@@ -35,9 +35,7 @@
                         <field name="product_id"/>
                         <field name="company_id" invisible="1"/>
                     </group>
-                    <group string="Médicos Asociados">
-                        <field name="medico_ids" widget="many2many_tags"/> <!-- Campo para médicos asociados -->
-                    </group>
+
                 </sheet>
             </form>
         </field>

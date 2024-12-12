@@ -13,7 +13,6 @@ class Medico(models.Model):
         ondelete='cascade',
         help='Seleccione un empleado que sea un médico.',
     )
-    specialty = fields.Char(string='Especialidad', tracking=True)
     license_number = fields.Char(string='Número de Licencia', required=True)
     phone = fields.Char(related='name.work_phone', string='Teléfono', readonly=True)
     email = fields.Char(related='name.work_email', string='Correo Electrónico', readonly=True)

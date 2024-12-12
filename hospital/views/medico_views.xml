@@ -19,7 +19,6 @@
         <field name="arch" type="xml">
             <tree>
                 <field name="name"/>
-                <field name="specialty"/>
                 <field name="phone"/>
                 <field name="email"/>
                 <field name="active"/>
@@ -36,7 +35,6 @@
                 <sheet>
                     <group>
                         <field name="name"/>
-                        <field name="specialty"/>
                         <field name="license_number"/>
                     </group>
                     <group>

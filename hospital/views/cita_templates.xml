@@ -1,60 +1,56 @@
-<?xml version="1.0" encoding="UTF-8"?>
 <odoo>
-    <template id="cita_form_template" name="Formulario de Solicitud de Cita">
+    <!-- Formulario público para solicitar citas -->
+    <template id="cita_form_new" name="Formulario de Solicitud de Cita" t-name="hospital.cita_form">
         <t t-call="website.layout">
-            <t t-call-assets="web.assets_frontend" />
             <div class="container">
                 <h1>Solicitar una Cita</h1>
-                <form class="cita-form" action="/crearcita" method="post">
-                    <div>
-                        <label for="nombre">Nombre:</label>
-                        <input type="text" name="nombre" required="true" />
+                <form action="/enviar_cita" method="post">
+                    <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                    <div class="form-group">
+                        <label for="nombre">Nombre</label>
+                        <input type="text" name="nombre" id="nombre" class="form-control" required="required"/>
                     </div>
-                    <div>
-                        <label for="email">Correo:</label>
-                        <input type="email" id="email" name="email" required="true" />
+                    <div class="form-group">
+                        <label for="correo">Correo</label>
+                        <input type="email" name="correo" id="correo" class="form-control" required="required"/>
                     </div>
-                    <div>
-                        <label for="telefono">Teléfono:</label>
-                        <input type="tel" id="telefono" name="telefono" required="true" />
+                    <div class="form-group">
+                        <label for="telefono">Teléfono (Whatsapp)</label>
+                        <input type="text" name="telefono" id="telefono" class="form-control" required="required"/>
                     </div>
-                    <div>
-                        <label for="especialidad">Especialidad:</label>
-                        <select id="especialidad" name="especialidad" required="true">
-                            <option value="">Seleccione...</option>
-                            <t t-foreach="especialidades" t-as="especialidad">
-                                <option t-att-value="especialidad.id">
-                                    <t t-esc="especialidad.name" />
-                                </option>
+                    <div class="form-group">
+                        <label for="fecha_cita">Fecha y Hora</label>
+                        <input type="datetime-local" name="fecha_cita" id="fecha_cita" class="form-control" required="required"/>
+                    </div>
+                    <div class="form-group">
+                        <label for="medico_id">Médico</label>
+                        <select name="medico_id" id="medico_id" class="form-control" required="required">
+                            <option value="">Seleccione un médico</option>
+                            <t t-foreach="medicos" t-as="medico">
+                                <option t-att-value="medico.id"><t t-esc="medico.name"/></option>
                             </t>
                         </select>
                     </div>
-                    <div>
-                        <label for="medico">Médico:</label>
-                        <select id="medico" name="medico" >
-                            <!-- Opciones cargadas dinámicamente con JavaScript required="true" -->
-                        </select>
+                    <div class="form-group">
+                        <label for="observaciones">Observaciones</label>
+                        <textarea name="observaciones" id="observaciones" class="form-control"></textarea>
                     </div>
-                    <div>
-                        <label for="fecha_hora">Fecha y Hora:</label>
-                        <input type="datetime-local" id="fecha_hora" name="fecha_hora" required="true" />
-                    </div>
-                    <div>
-                        <label for="comentarios">Comentarios:</label>
-                        <textarea id="comentarios" name="comentarios"></textarea>
-                    </div>
-                    <button type="submit">Solicitar Cita</button>
+                    <button type="submit" class="btn btn-primary">Enviar</button>
                 </form>
+                <t t-if="error">
+                    <div class="alert alert-danger mt-3"><t t-esc="error"/></div>
+                </t>
             </div>
-            <script type="text/javascript" src="/hospital/static/src/js/cita_form.js"></script>
         </t>
     </template>
 
-    <template id="cita_confirmacion_template" name="Confirmación de Cita">
+    <!-- Página de éxito -->
+    <template id="cita_success" name="Cita Enviada Exitosamente" t-name="clinica.cita_success">
         <t t-call="website.layout">
-            <div class="container">
-                <h1>¡Cita Solicitada!</h1>
-                <p>Su solicitud de cita ha sido enviada correctamente. Nos pondremos en contacto pronto.</p>
+            <div class="container text-center">
+                <h1>Cita Solicitada</h1>
+                <p>Gracias por su solicitud. Nos pondremos en contacto con usted pronto.</p>
+                <a href="/" class="btn btn-primary">Volver al inicio</a>
             </div>
         </t>
     </template>

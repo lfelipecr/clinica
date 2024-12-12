@@ -26,8 +26,4 @@ class Especialidad(models.Model):
         default=lambda self: self.env.company.currency_id,
         required=True,
     )
-    medico_ids = fields.Many2many(
-        'clinica.medico',
-        string='Médicos Asociados',
-        help='Selecciona los médicos que pueden ofrecer esta especialidad.',
-    )
+
